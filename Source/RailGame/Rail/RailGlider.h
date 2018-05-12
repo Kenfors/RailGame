@@ -25,15 +25,31 @@ public:
 	bool bIsGameOver = false;
 
 	uint8 VelocityMultiplier;
+	UPROPERTY(EditAnywhere, Category = "F&K Gameplay")
 	uint16 Velocity;
+	UPROPERTY(EditAnywhere, Category = "F&K Gameplay")
+	bool DoDrawIngameDebugPath = false;
+
+	bool bHasPlayerAttached = false;
 
 	float ticker;
 
 	FVector CheckpointTarget;
-	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, Category = "Checkpoints")
+	UPROPERTY(EditAnywhere, Category = "F&K Checkpoints")
 	TArray<FVector> Checkpoints;
 	uint8 CurrentCheckpointIndex;
-	
+
+
+	UPROPERTY(EditAnywhere, Category = "F&K Checkpoints")
+	bool DoDrawDebugLines = false;
+
+	void AttachPlayer(APawn* AttachingPawn);
+	void DetachPlayer();
+
+	class ARailCharacter* MainCharacter;
+
+	virtual void OnConstruction(const FTransform& Transform) override;
+	virtual void PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent) override;
 
 	bool CheckpointHandler();
 	

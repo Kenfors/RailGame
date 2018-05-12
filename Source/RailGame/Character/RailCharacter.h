@@ -23,6 +23,8 @@ public:
 		class UCameraComponent*  ViewCamera;
 
 
+
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -32,12 +34,20 @@ public:
 	virtual void Tick(float DeltaTime) override;
 	void SetupRailFollower(class ARailGlider Rail);
 
+
+	UFUNCTION()
+		void FindRail();
 	class ARailGlider* RailGlider;
+	void AttachToRail();
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	void MoveUp(const float Value);
 	void MoveRight(const float Value);
+	void MoveToRail(const float DeltaTime);
+	void MoveToAxis(float DeltaTime);
+	FVector oldDir;
+	FVector oldZDir;
 	
 	
 };
